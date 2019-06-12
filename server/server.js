@@ -1,5 +1,14 @@
+const express = require('express')
+const bodyParser = require('body-parser')
+const cors = require('cors')
+const morgan = require('morgan')
 var firebase = require('firebase-admin')
 var serviceAccount = require('./book-store-7dc95-firebase-adminsdk-modx9-89845da127')
+
+const app = express()
+app.use(morgan('combined'))
+app.use(bodyParser.json())
+app.use(cors())
 
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
@@ -8,9 +17,6 @@ firebase.initializeApp({
 
 var db = firebase.database()
 var ref = db.ref('tables')
-ref.once('value', function (snapshot) {
-  console.log(snapshot.val())
-})
 
 var usersRef = ref.child('users')
 usersRef.set({
@@ -23,3 +29,5 @@ usersRef.set({
     full_name: 'Grace Hopper'
   }
 })
+
+app.listen(process.env.PORT || 8081)
