@@ -9,4 +9,4 @@ cache:
 
 
 script:
-  - npm run start
+  - npm run lint
