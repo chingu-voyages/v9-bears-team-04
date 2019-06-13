@@ -1,8 +1,13 @@
 <template>
-  <div class="login">  
-    <div class="form">
+  <div class="login">
+    <div class="login__form">
       <input type="email" class="form-control" v-model="email" placeholder="Email">
       <input type="password" class="form-control" v-model="password" placeholder="Password">
+      <button class="btn btn-login">Login</button>
+      <div class="social">
+        <button class="btn btn-google">Login with Google</button>
+        <button class="btn btn-facebook">Login with Facebook</button>
+      </div>
     </div>
   </div>
 </template>
@@ -12,8 +17,8 @@ export default {
   name: 'Login',
   data () {
     return {
-      email:'',
-      password:''
+      email: '',
+      password: ''
     }
   }
 }
@@ -21,13 +26,44 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .form{
+  .login{
+    padding-right: 40px;
+    padding-left: 40px;
     display: flex;
-    justify-content: center;
+    justify-content: center
   }
-  .form input{
-    flex: 0 1 100%; 
+  .login__form{
+    width: 400px;
   }
+  .login__form input{
+    /* flex: 1 1 100%; */
+    margin-bottom: 10px;
+  }
+  .btn{
+    border: none;
+    padding: 1em 1.5em;
+    box-shadow: #ced4da;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .btn-login{
+    margin-top: 1em;
+    background-color: #060606;
+    color: #FFF;
+  }
+  .social{
+    margin-top: 1em;
+  }
+  .btn-google{
+    background-color: #D34836;
+    color: #FFF;
+  }
+
+  .btn-facebook{
+    background-color: #4267B2;
+    color: #FFF;
+  }
+
 
   .form-control{
     display: block;
