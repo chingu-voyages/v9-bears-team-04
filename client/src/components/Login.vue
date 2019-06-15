@@ -3,16 +3,18 @@
     <div class="login__form">
       <input type="email" class="form-control" v-model="email" placeholder="Email">
       <input type="password" class="form-control" v-model="password" placeholder="Password">
-      <button class="btn btn-login">Login</button>
+      <button class="btn btn-login" v-on:click="Login">Login</button>
       <div class="social">
-        <button class="btn btn-google">Login with Google</button>
-        <button class="btn btn-facebook">Login with Facebook</button>
+        <button class="btn btn-google" v-on:click="googleAuth">Login with Google</button>
+        <!-- <button class="btn btn-facebook" v-on:click="facebookAuth">Login with Facebook</button> -->
       </div>
+      <div>{{isAuthenticated}}</div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 export default {
   name: 'Login',
   data () {
@@ -20,7 +22,26 @@ export default {
       email: '',
       password: ''
     }
-  }
+  },
+  mounted () {
+    // call the init firebase from store
+    this.$store.dispatch('initFirebase')
+  },
+  methods: {
+    ...mapActions(['googleAuth']),
+
+    Login () {
+      // alert('Click Event for Login Worked!')
+      // firebase.auth().signInWithEmailAndPassword(this.email, this.password)
+      //   .then((result) => {
+      //     console.log(result)
+      //   })
+      //   .catch((error) => {
+      //     console.log('ERROR ' + error.message)
+      //   })
+    }
+  },
+  computed: mapGetters(['authUser', 'isAuthenticated'])
 }
 </script>
 
@@ -63,7 +84,6 @@ export default {
     background-color: #4267B2;
     color: #FFF;
   }
-
 
   .form-control{
     display: block;
