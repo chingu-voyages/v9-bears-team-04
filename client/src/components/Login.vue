@@ -8,7 +8,7 @@
         <button class="btn btn-google" v-on:click="googleAuth">Login with Google</button>
         <!-- <button class="btn btn-facebook" v-on:click="facebookAuth">Login with Facebook</button> -->
       </div>
-      <div>{{isAuthenticated}}</div>
+      <!-- <div>{{isAuthenticated}}</div> -->
     </div>
   </div>
 </template>
