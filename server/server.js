@@ -30,4 +30,16 @@ usersRef.set({
   }
 })
 
+app.post('/api/v1/auth/google', (req, res) => {
+  // user
+  const user = req.body
+  // persist user to DB -- if user does not exists
+  // console.log(user)
+  db.ref('tables').ref('users/ ' + user.uid).set({
+    full_name: user.displayName,
+    photoURL: user.photoURL,
+    email: user.email
+  })
+})
+
 app.listen(process.env.PORT || 8081)
