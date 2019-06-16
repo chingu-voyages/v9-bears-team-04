@@ -1,11 +1,13 @@
 import axios from 'axios'
 import firebase from 'firebase'
 import * as config from '../../../app-config'
-import { AUTHENTICATED } from '../mutation-types'
+import { AUTHENTICATED, FETCH_USER, LOGOUT } from '../mutation-types'
+import Router from '../../router'
 
 const state = {
   user: {},
-  isAuthenticated: false
+  isAuthenticated: false,
+  token: localStorage.getItem('access_token')
 }
 
 const getters = {
@@ -31,26 +33,42 @@ const actions = {
   googleAuth ({ commit }) {
     const provider = new firebase.auth.GoogleAuthProvider()
     // alert('Click Event for Google Worked!')
-    firebase.auth().signInWithPopup(provider).then((result) => {
+    firebase.auth().signInWithPopup(provider).then(function (result) {
     // The signed-in user info.
-      this.user = result.user
-      console.log(this.user)
+      const user = result.user
+      // console.log(user)
       if (result.additionalUserInfo.isNewUser) {
-        axios.post('http://localhost:8081/api/v1/auth/google', this.user)
+        axios.post('http://localhost:8081/api/v1/auth/google', user)
           .then(response => {
-            // commit state change
-            commit(AUTHENTICATED)
+            console.log(response)
           })
           .catch(err => {
             console.log('ERROR ' + err)
           })
-      } else {
-
       }
-    }).catch((error) => {
+      // commit state change
+      commit(AUTHENTICATED)
+      commit(FETCH_USER, user)
+      // save access token to localstorage
+      localStorage.setItem('access_token', user.ra)
+      // redirect to authenticated page
+      Router.push({name: 'Home'})
+    }).catch(function (error) {
       console.log('ERROR ' + error.message)
     })
     // console.log('I am here now!')
+  },
+
+  logout ({ commit }) {
+    firebase.auth().signOut().then(function () {
+      // Sign-out successful.
+      commit(LOGOUT)
+      Router.push({
+        name: 'Login'
+      })
+    }).catch((error) => {
+      console.log('ERROR ' + error)
+    })
   }
 }
 
@@ -58,6 +76,14 @@ const mutations = {
   [AUTHENTICATED] (state) {
     // mutate state
     state.isAuthenticated = true
+  },
+  [FETCH_USER] (state, user) {
+    // mutate state
+    state.user = user
+  },
+  [LOGOUT] (state) {
+    // mutate state
+    state.isAuthenticated = false
   }
 }
 
