@@ -8,7 +8,7 @@
         <button class="btn btn-google" v-on:click="googleAuth">Login with Google</button>
         <!-- <button class="btn btn-facebook" v-on:click="facebookAuth">Login with Facebook</button> -->
       </div>
-      <!-- <div>{{isAuthenticated}}</div> -->
+      <!-- <div v-if="isAuthenticated">Welcome ...{{ authUser.displayName }}</div> -->
     </div>
   </div>
 </template>
@@ -46,7 +46,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   .login{
     padding-right: 40px;
     padding-left: 40px;
