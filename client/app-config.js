@@ -1,0 +1,7 @@
+export const FIREBASE_APIKEY = 'AIzaSyDfZ85hXmaywcgAWFh_m4GecTO_g1bYoNE'
+export const FIREBASE_AUTHDOMAIN = 'book-store-7dc95.firebaseapp.com'
+export const FIREBASE_DATABASE_URL = 'https://book-store-7dc95.firebaseio.com'
+export const FIREBASE_PROJECT_ID = 'book-store-7dc95'
+export const FIREBASE_STORAGE_BUCKET = 'book-store-7dc95.appspot.com'
+export const FIREBASE_MESSAGING_SENDERID = '578357640845'
+export const FIREBASE_APPID = '1:578357640845:web:fb24150806af73c3'
