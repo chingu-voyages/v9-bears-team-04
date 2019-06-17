@@ -1,13 +1,15 @@
 <template>
     <v-app>
-    <h1>Books-List</h1>
-    <h2>ASDSD</h2>
+    <books-table/>
     </v-app>
 </template>
 
 <script>
+import BooksTable from './elements/BooksTable'
+
 export default {
-  name: 'BooksList'
+  name: 'BooksList',
+  components: {BooksTable}
 }
 </script>
 
