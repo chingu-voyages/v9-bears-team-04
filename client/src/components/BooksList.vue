@@ -1,8 +1,8 @@
 <template>
-  <div>
+    <v-app>
     <h1>Books-List</h1>
     <h2>ASDSD</h2>
-  </div>
+    </v-app>
 </template>
 
 <script>
