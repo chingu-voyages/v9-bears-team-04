@@ -3,3 +3,5 @@ node_modules/
 .DS_Store
 client/node_modules
 .idea/
+client/package-lock.json
+package-lock.json
