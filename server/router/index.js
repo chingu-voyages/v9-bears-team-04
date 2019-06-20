@@ -34,7 +34,7 @@ router.post('/api/v1/auth/google', (req, res) => {
   })
 })
 
-router.post('/api/books-list', (req, res) => {
+router.post('/api/books', (req, res) => {
   // book
   const book = req.body
 
@@ -61,6 +61,28 @@ router.post('/api/user-book-rel', (req, res) => {
   return res.status(200).send({
     success: true,
     message: 'Relation saved!'
+  })
+})
+
+router.post('/api/book-list', (req, res) => {
+  var answerBooks = {}
+  const requestedUserID = req.body.userID
+  db.ref('tables').once('value').then(function (snapshot) {
+    var relations = snapshot.child('relations').toJSON()
+    var books = snapshot.child('books').toJSON()
+
+    var relationsKeys = Object.keys(relations)
+    relationsKeys.forEach(function (key) {
+      // Compare userID in a relation we are looking now and userID who requested to get a book list
+      if (relations[key].userID === requestedUserID) {
+        // Add status of reading process for this exact book for this exact reader to give it back to him
+        books[relations[key].bookID].status = relations[key].status
+        answerBooks[relations[key].bookID] = books[relations[key].bookID]
+      }
+    })
+    return res.status(200).send({
+      books: answerBooks
+    })
   })
 })
 
