@@ -34,6 +34,7 @@ router.post('/api/v1/auth/google', (req, res) => {
   })
 })
 
+// Allow you to add a book and request title, author, year
 router.post('/api/books', (req, res) => {
   // book
   const book = req.body
@@ -49,6 +50,18 @@ router.post('/api/books', (req, res) => {
   })
 })
 
+// Allow you to delete a book from data base and request you to send bookID
+router.delete('/api/books', (req, res) => {
+  var requestedBookId = req.body.bookID
+
+  db.ref('tables/books/' + requestedBookId).remove()
+  return res.status(200).send({
+    success: true,
+    message: 'Book deleted'
+  })
+})
+
+// Allow you to add a relation between the book and the user and request userID, bookID and status
 router.post('/api/user-book-rel', (req, res) => {
   const rel = req.body
   console.log(rel)
@@ -64,6 +77,7 @@ router.post('/api/user-book-rel', (req, res) => {
   })
 })
 
+// Allow you to receive book list for the user and request you to send userID
 router.post('/api/book-list', (req, res) => {
   var answerBooks = {}
   const requestedUserID = req.body.userID
@@ -82,6 +96,30 @@ router.post('/api/book-list', (req, res) => {
     })
     return res.status(200).send({
       books: answerBooks
+    })
+  })
+})
+
+// Allow you to delete a book to user relation from data base and request you to send bookID and userID
+router.delete('/api/user-book-rel', (req, res) => {
+  var requestedBookId = req.body.bookID
+  var requestedUserID = req.body.userID
+
+  db.ref('tables/relations').once('value').then(function (snapshot) {
+    var relations = snapshot.toJSON()
+
+    var relationsKeys = Object.keys(relations)
+    relationsKeys.forEach(function (key) {
+      if (relations[key].userID === requestedUserID && relations[key].bookID === requestedBookId) {
+        db.ref('tables/relations/' + key).remove()
+        return res.status(200).send({
+          success: true,
+          message: 'Relation was deleted'
+        })
+      }
+    })
+    return res.status(404).send({
+      message: 'There is no such relation'
     })
   })
 })
