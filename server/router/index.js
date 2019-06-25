@@ -50,11 +50,25 @@ router.post('/api/books', (req, res) => {
   })
 })
 
+// Allow you to update a book from data base and request bookID new title, new author and new year to replace
+router.patch('/api/books', (req, res) => {
+  var requestedBookID = req.body.bookID
+
+  db.ref('tables/books/' + requestedBookID).update({ 'title': req.body.title,
+    'author': req.body.author,
+    'year': req.body.year
+  })
+  return res.status(200).send({
+    success: true,
+    message: 'Book has been updated'
+  })
+})
+
 // Allow you to delete a book from data base and request you to send bookID
 router.delete('/api/books', (req, res) => {
-  var requestedBookId = req.body.bookID
+  var requestedBookID = req.body.bookID
 
-  db.ref('tables/books/' + requestedBookId).remove()
+  db.ref('tables/books/' + requestedBookID).remove()
   return res.status(200).send({
     success: true,
     message: 'Book deleted'
