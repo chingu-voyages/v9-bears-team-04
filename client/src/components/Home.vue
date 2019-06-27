@@ -8,7 +8,6 @@
       </v-flex>
       <v-flex xs8 >
         <div class="home__main">
-          <!-- <img src="../assets/bookstore.png" alt="" style="padding: 200px"> -->
         </div>
       </v-flex>
     </v-layout>
@@ -28,7 +27,6 @@ export default {
 
 <style scoped>
   .home{
-    /* background-color: rgb(171, 217, 248) !important; */
     height: 80vh;
   }
   div.container{

@@ -42,24 +42,12 @@ export default {
     this.$store.dispatch('initFirebase')
   },
   methods: {
-    ...mapActions(['googleAuth']),
-
-    Login () {
-      // alert('Click Event for Login Worked!')
-      // firebase.auth().signInWithEmailAndPassword(this.email, this.password)
-      //   .then((result) => {
-      //     console.log(result)
-      //   })
-      //   .catch((error) => {
-      //     console.log('ERROR ' + error.message)
-      //   })
-    }
+    ...mapActions(['googleAuth'])
   },
   computed: mapGetters(['authUser', 'isAuthenticated'])
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
   .login{
     padding-right: 40px;
@@ -68,7 +56,6 @@ export default {
     justify-content: center;
     height: 80vh;
     align-items: center;
-    /* background-color: rgb(171, 217, 248) !important; */
     background-image: url('../assets/background.png');
     background-position: center;
   }
@@ -76,7 +63,6 @@ export default {
     width: 400px;
   }
   .login__form input{
-    /* flex: 1 1 100%; */
     margin-bottom: 10px;
   }
   .btn{
