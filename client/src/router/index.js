@@ -3,26 +3,64 @@ import Router from 'vue-router'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
 import BooksList from '@/components/BooksList'
+import BookView from '@/components/BookView'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
+      meta: {
+        guest: true
+      }
     },
     {
-      path: '/home',
+      path: '/',
       name: 'Home',
-      component: Home
+      component: Home,
+      meta: {
+        guest: true
+      }
     },
     {
       path: '/books-list',
       name: 'BooksList',
-      component: BooksList
+      component: BooksList,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: '/book/:bookID',
+      name: 'BookView',
+      component: BookView,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // console.log(localStorage.getItem('access_token'))
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (localStorage.getItem('access_token') == null) {
+      next({
+        path: '/login',
+        params: {
+          nextUrl: to.fullPath
+        }
+      })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
+})
+
+export default router
