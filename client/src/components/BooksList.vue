@@ -42,27 +42,27 @@ export default {
     Book
   },
   data: () => ({
-      items: [
-        {
-          id: 1,
-          name: 'All Books :',
-          children: [
-            { id: 2, name: 'Unleash the dragon by Norman Powell' },
-            { id: 3, name: 'Code For You by Widderman Lee' },
-            { id: 4, name: 'Счастливые люди Ростова' }
-          ]
-        },
-        {
-          id: 15,
-          name: 'Targets :',
-          children: [
-            { id: 16, name: 'October : pdf' },
-            { id: 17, name: 'November : pdf' },
-            { id: 18, name: 'Tutorial : html' }
-          ]
-        }
-      ]
-    })
+    items: [
+      {
+        id: 1,
+        name: 'All Books :',
+        children: [
+          { id: 2, name: 'Unleash the dragon by Norman Powell' },
+          { id: 3, name: 'Code For You by Widderman Lee' },
+          { id: 4, name: 'Счастливые люди Ростова' }
+        ]
+      },
+      {
+        id: 15,
+        name: 'Targets :',
+        children: [
+          { id: 16, name: 'October : pdf' },
+          { id: 17, name: 'November : pdf' },
+          { id: 18, name: 'Tutorial : html' }
+        ]
+      }
+    ]
+  })
 }
 </script>
 

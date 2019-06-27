@@ -8,7 +8,7 @@
       v-model="snackbar"
       :timeout="timeout"
       :top="true"
-      :color="color"
+      :color="snackbarColor"
       primary
     >
       {{ snackbarText }}
@@ -27,7 +27,7 @@
 <script>
 import Navbar from './components/elements/Navbar'
 import Footer from './components/elements/Footer'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -36,15 +36,13 @@ export default {
   },
   data () {
     return {
-      snackbar: snackbar,
       y: 'top',
       x: null,
       mode: '',
-      color:snackbarColor,
-      timeout: 6000, snackbarText
+      timeout: 6000
     }
   },
-  computed: mapGetters(['snackbar','snackbarText','snackbarColor'])
+  computed: mapGetters(['snackbar', 'snackbarText', 'snackbarColor'])
 }
 </script>
 
@@ -56,5 +54,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
 </style>

@@ -39,14 +39,14 @@
                         <div class="">
                             <h2 class="red--text font-weight-bold justify-space-between"><v-icon large color="red darken-2">access_time</v-icon><span class="ml-5">Page per day</span><span class="ml-5"><v-btn outline fab small color="red" class="font-weight-bold">5</v-btn></span></h2>
                         </div>
-                         <div class="d-flex mt-1">                            
+                         <div class="d-flex mt-1">
                             <h2 class="white--text font-weight-bold justify-space-between">
                                 <v-icon large color="white">list</v-icon>
                                 <span class="ml-5">Before</span>
                                 <span class="ml-5">27/06/2019</span>
-                            </h2>                            
+                            </h2>
                         </div>
-                    </div>                    
+                    </div>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -55,9 +55,9 @@
 <script>
 export default {
   name: 'BookView',
-  data: () =>{
+  data: () => {
     return {
-        rating: 4
+      rating: 4
     }
   }
 }
