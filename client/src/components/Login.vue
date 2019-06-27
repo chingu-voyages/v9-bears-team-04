@@ -1,14 +1,28 @@
 <template>
   <div class="login">
     <div class="login__form">
-      <input type="email" class="form-control" v-model="email" placeholder="Email">
-      <input type="password" class="form-control" v-model="password" placeholder="Password">
-      <button class="btn btn-login" v-on:click="Login">Login</button>
+      <h1 class="text">BOOK STORE</h1>
+      <v-flex xs12 sm12 md12>
+          <v-text-field
+            label="Email"
+            single-line
+            outline
+            v-model="email"
+          ></v-text-field>
+        </v-flex>
+        <v-flex xs12 sm12 md12>
+          <v-text-field
+            type="password"
+            label="Password"
+            single-line
+            outline
+            v-model="password"
+          ></v-text-field>
+        </v-flex>
+      <v-btn color="primary" v-on:click="Login" large>Login</v-btn>
       <div class="social">
-        <button class="btn btn-google" v-on:click="googleAuth">Login with Google</button>
-        <!-- <button class="btn btn-facebook" v-on:click="facebookAuth">Login with Facebook</button> -->
+        <v-btn color="error" v-on:click="googleAuth" large><v-icon left dark>fa fa-google</v-icon>Login With Google</v-btn>
       </div>
-      <!-- <div v-if="isAuthenticated">Welcome ...{{ authUser.displayName }}</div> -->
     </div>
   </div>
 </template>
@@ -51,7 +65,12 @@ export default {
     padding-right: 40px;
     padding-left: 40px;
     display: flex;
-    justify-content: center
+    justify-content: center;
+    height: 80vh;
+    align-items: center;
+    /* background-color: rgb(171, 217, 248) !important; */
+    background-image: url('../assets/background.png');
+    background-position: center;
   }
   .login__form{
     width: 400px;
@@ -79,12 +98,10 @@ export default {
     background-color: #D34836;
     color: #FFF;
   }
-
   .btn-facebook{
     background-color: #4267B2;
     color: #FFF;
   }
-
   .form-control{
     display: block;
     width: 100%;
@@ -98,4 +115,8 @@ export default {
     border-radius: 2px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
+  .text{
+    margin-bottom: 1em;
+  }
+
 </style>
