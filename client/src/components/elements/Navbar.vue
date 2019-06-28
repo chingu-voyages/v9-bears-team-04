@@ -26,7 +26,7 @@
                     >
                     <v-list-tile-title v-if="item.route"><router-link
             :to="{ name: item.route, params: {} }">{{ item.title }}</router-link></v-list-tile-title>
-                    <v-list-tile-title v-else v-on:click="logout">{{ item.title }}</v-list-tile-title>
+                    <v-list-tile-title v-else v-on:click="logout" style="cursor: pointer">{{ item.title }}</v-list-tile-title>
                     </v-list-tile>
                 </v-list>
             </v-menu>
