@@ -12,13 +12,6 @@
       primary
     >
       {{ snackbarText }}
-      <v-btn
-        color="white"
-        flat
-        @click="snackbar = false"
-      >
-        Close
-      </v-btn>
     </v-snackbar>
     </v-app>
   </div>

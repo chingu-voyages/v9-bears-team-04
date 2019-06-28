@@ -1,5 +1,5 @@
 <template>
-  <div class="bookList">
+  <div class="bookList primary">
     <v-container grid-list-md>
       <v-layout row wrap>
         <v-flex xs4 image text-md-left font-weight-bold>
@@ -13,7 +13,7 @@
             <v-tooltip top>
               <template v-slot:activator="{ on }">
                 <v-btn
-                  color="primary"
+                  color="red"
                   dark
                   relative
                   bottom
@@ -67,9 +67,6 @@ export default {
 </script>
 
 <style scoped>
-  .bookList{
-    background-color: rgb(171, 217, 248) !important;
-  }
   .image{
     background-image: url("../assets/background.png");
     background-position: top;

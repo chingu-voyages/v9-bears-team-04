@@ -79,7 +79,7 @@ const actions = {
       })
       localStorage.removeItem('access_token')
       Router.push({
-        name: 'Login'
+        name: 'Home'
       })
     }).catch((error) => {
       console.log('ERROR ' + error)

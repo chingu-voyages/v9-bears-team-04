@@ -37,10 +37,6 @@ export default {
       password: ''
     }
   },
-  mounted () {
-    // call the init firebase from store
-    this.$store.dispatch('initFirebase')
-  },
   methods: {
     ...mapActions(['googleAuth'])
   },
