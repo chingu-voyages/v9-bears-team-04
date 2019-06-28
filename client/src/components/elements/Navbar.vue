@@ -46,8 +46,7 @@ export default {
   mounted () {
     // call the init firebase from store
     this.$store.dispatch('initFirebase')
-  }
-  ,
+  },
   computed: mapGetters(['authUser', 'isAuthenticated']),
   methods: {
     ...mapActions(['logout'])

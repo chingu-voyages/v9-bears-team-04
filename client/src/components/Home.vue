@@ -7,12 +7,12 @@
         <p class="headline"><router-link :to="{name:'BooksList'}">Add your first book ></router-link></p>
       </v-flex>
       <v-flex xs8 >
-        <div class="home__main">  
+        <div class="home__main">
           <div class="home__image">
             <img src="../assets/rsz_bookstore.png" alt="">
-          </div>                 
+          </div>
         </div>
-        <div class="home__main__two">                   
+        <div class="home__main__two">
         </div>
       </v-flex>
     </v-layout>
