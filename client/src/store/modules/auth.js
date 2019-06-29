@@ -1,18 +1,25 @@
 import axios from 'axios'
 import firebase from 'firebase'
 import * as config from '../../../app-config'
-import { AUTHENTICATED, FETCH_USER, LOGOUT } from '../mutation-types'
+import { AUTHENTICATED, FETCH_USER, LOGOUT, SNACKBAR } from '../mutation-types'
 import Router from '../../router'
 
+let isAuthenticated = localStorage.getItem('access_token') !== null
 const state = {
   user: {},
-  isAuthenticated: false,
-  token: localStorage.getItem('access_token')
+  isAuthenticated: isAuthenticated,
+  token: localStorage.getItem('access_token'),
+  snackbar: false,
+  snackbarText: '',
+  snackbarColor: ''
 }
 
 const getters = {
   authUser: state => state.user,
-  isAuthenticated: state => state.isAuthenticated
+  isAuthenticated: state => state.isAuthenticated,
+  snackbar: state => state.snackbar,
+  snackbarText: state => state.snackbarText,
+  snackbarColor: state => state.snackbarColor
 }
 
 const actions = {
@@ -32,11 +39,9 @@ const actions = {
 
   googleAuth ({ commit }) {
     const provider = new firebase.auth.GoogleAuthProvider()
-    // alert('Click Event for Google Worked!')
     firebase.auth().signInWithPopup(provider).then(function (result) {
     // The signed-in user info.
       const user = result.user
-      // console.log(user)
       if (result.additionalUserInfo.isNewUser) {
         axios.post('http://localhost:8081/api/v1/auth/google', user)
           .then(response => {
@@ -51,20 +56,30 @@ const actions = {
       commit(FETCH_USER, user)
       // save access token to localstorage
       localStorage.setItem('access_token', user.ra)
+      commit('SNACKBAR', {
+        snackbar: true,
+        text: 'Welcome',
+        color: 'success'
+      })
       // redirect to authenticated page
       Router.push({name: 'Home'})
     }).catch(function (error) {
       console.log('ERROR ' + error.message)
     })
-    // console.log('I am here now!')
   },
 
   logout ({ commit }) {
     firebase.auth().signOut().then(function () {
       // Sign-out successful.
       commit(LOGOUT)
+      commit('SNACKBAR', {
+        snackbar: true,
+        text: 'Logged Out Successfully',
+        color: 'success'
+      })
+      localStorage.removeItem('access_token')
       Router.push({
-        name: 'Login'
+        name: 'Home'
       })
     }).catch((error) => {
       console.log('ERROR ' + error)
@@ -84,6 +99,11 @@ const mutations = {
   [LOGOUT] (state) {
     // mutate state
     state.isAuthenticated = false
+  },
+  [SNACKBAR] (state, payload) {
+    state.snackbar = payload.snackbar
+    state.snackbarText = payload.text
+    state.snackbarColor = payload.color
   }
 }
 
