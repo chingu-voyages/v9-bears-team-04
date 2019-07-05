@@ -23,6 +23,8 @@
       <div class="social">
         <v-btn color="error" v-on:click="googleAuth" large><v-icon left dark>fa fa-google</v-icon>Login With Google</v-btn>
       </div>
+      <p class="font-weight-bold title pt-3">Don't have an account? <router-link
+            :to="{ name: 'Register', params: {} }">Sign Up</router-link></p>
     </div>
   </div>
 </template>
