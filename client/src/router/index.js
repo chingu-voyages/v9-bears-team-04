@@ -4,6 +4,7 @@ import Login from '@/components/Login'
 import Home from '@/components/Home'
 import BooksList from '@/components/BooksList'
 import BookView from '@/components/BookView'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
@@ -22,6 +23,14 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: Home,
+      meta: {
+        guest: true
+      }
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register,
       meta: {
         guest: true
       }

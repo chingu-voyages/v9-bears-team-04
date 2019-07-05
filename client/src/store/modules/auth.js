@@ -64,8 +64,44 @@ const actions = {
       // redirect to authenticated page
       Router.push({name: 'Home'})
     }).catch(function (error) {
-      console.log('ERROR ' + error.message)
+      commit('SNACKBAR', {
+        snackbar: true,
+        text: 'oops we could not process your request due to' + error.message,
+        color: 'success'
+      })
     })
+  },
+
+  register ({ commit }, user) {
+    // create user account
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+      .then(() => {
+        axios.post('http://localhost:8081/api/register', user)
+          .then(() => {
+            commit('SNACKBAR', {
+              snackbar: true,
+              text: 'Registeration Successfull',
+              color: 'success'
+            })
+            Router.push({
+              name: 'Login'
+            })
+          })
+          .catch((error) => {
+            commit('SNACKBAR', {
+              snackbar: true,
+              text: 'We could not save your details due to' + error.message,
+              color: 'danger'
+            })
+          })
+      })
+      .catch(function (error) {
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: `Error Code ${error.code} caused by ${error.message}`,
+          color: 'danger'
+        })
+      })
   },
 
   logout ({ commit }) {
