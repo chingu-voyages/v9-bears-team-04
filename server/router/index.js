@@ -22,7 +22,6 @@ router.post('/api/v1/auth/google', (req, res) => {
   // user
   const user = req.body
   // persist user to DB -- if user does not exists
-  // console.log(user)
   db.ref('tables').child('users/ ' + user.uid).set({
     full_name: user.displayName,
     photoURL: user.photoURL,
@@ -31,6 +30,19 @@ router.post('/api/v1/auth/google', (req, res) => {
   return res.status(200).send({
     success: true,
     message: 'User saved!'
+  })
+})
+
+router.post('/api/register', (req, res) => {
+  // save user details to user table
+  db.ref('tables').child('users/ ' + req.body.uid).set({
+    full_name: req.body.name,
+    email: req.body.email,
+    date_of_birth: req.body.date
+  })
+  res.status(200).send({
+    success: true,
+    message: 'User registered!'
   })
 })
 
@@ -92,7 +104,7 @@ router.post('/api/user-book-rel', (req, res) => {
 })
 
 // Allow you to receive book list for the user and request you to send userID
-router.post('/api/book-list', (req, res) => {
+router.get('/api/book-list', (req, res) => {
   var answerBooks = {}
   const requestedUserID = req.body.userID
   db.ref('tables').once('value').then(function (snapshot) {

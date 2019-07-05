@@ -10,6 +10,7 @@
       :top="true"
       :color="snackbarColor"
       primary
+      class="font-weight-bold"
     >
       {{ snackbarText }}
     </v-snackbar>

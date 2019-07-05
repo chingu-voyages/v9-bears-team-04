@@ -64,8 +64,70 @@ const actions = {
       // redirect to authenticated page
       Router.push({name: 'Home'})
     }).catch(function (error) {
-      console.log('ERROR ' + error.message)
+      commit('SNACKBAR', {
+        snackbar: true,
+        text: 'oops we could not process your request due to' + error.message,
+        color: 'success'
+      })
     })
+  },
+
+  register ({ commit }, user) {
+    // create user account
+    firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
+      .then((response) => {
+        user.uid = response.user.uid
+        axios.post('http://localhost:8081/api/register', user)
+          .then(() => {
+            commit('SNACKBAR', {
+              snackbar: true,
+              text: 'Registeration Successful',
+              color: 'success'
+            })
+            Router.push({
+              name: 'Login'
+            })
+          })
+          .catch((error) => {
+            commit('SNACKBAR', {
+              snackbar: true,
+              text: 'We could not save your details due to' + error.message,
+              color: 'error'
+            })
+          })
+      })
+      .catch(function (error) {
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: `Error Code ${error.code} caused by ${error.message}`,
+          color: 'error'
+        })
+      })
+  },
+
+  login ({ commit }, user) {
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+      .then((response) => {
+        commit(AUTHENTICATED)
+        commit(FETCH_USER, user)
+        // save access token to localstorage
+        localStorage.setItem('access_token', response.user.ra)
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: 'Welcome!',
+          color: 'success'
+        })
+        Router.push({
+          name: 'BooksList'
+        })
+      })
+      .catch(function () {
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: 'email or password incorrect!',
+          color: 'error'
+        })
+      })
   },
 
   logout ({ commit }) {

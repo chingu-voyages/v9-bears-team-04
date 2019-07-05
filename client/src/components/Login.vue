@@ -19,10 +19,12 @@
             v-model="password"
           ></v-text-field>
         </v-flex>
-      <v-btn color="primary" v-on:click="Login" large>Login</v-btn>
+      <v-btn color="primary" v-on:click="login({email,password})" large>Login</v-btn>
       <div class="social">
         <v-btn color="error" v-on:click="googleAuth" large><v-icon left dark>fa fa-google</v-icon>Login With Google</v-btn>
       </div>
+      <p class="font-weight-bold title pt-3">Don't have an account? <router-link
+            :to="{ name: 'Register', params: {} }">Sign Up</router-link></p>
     </div>
   </div>
 </template>
@@ -38,7 +40,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['googleAuth'])
+    ...mapActions(['googleAuth', 'login'])
   },
   computed: mapGetters(['authUser', 'isAuthenticated'])
 }
