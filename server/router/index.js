@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const firebase = require('firebase-admin')
-const uuid = require('uuid')
 const serviceAccount = require('../book-store-7dc95-firebase-adminsdk-modx9-89845da127')
 
 firebase.initializeApp({
@@ -35,11 +34,8 @@ router.post('/api/v1/auth/google', (req, res) => {
 })
 
 router.post('/api/register', (req, res) => {
-  // user
-  const userID = uuid.v1()
-  // create user Auth account and persist to DB
   // save user details to user table
-  db.ref('tables').child('users/ ' + userID).set({
+  db.ref('tables').child('users/ ' + req.body.uid).set({
     full_name: req.body.name,
     email: req.body.email,
     date_of_birth: req.body.date
