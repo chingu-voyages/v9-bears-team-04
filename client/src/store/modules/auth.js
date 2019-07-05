@@ -75,12 +75,13 @@ const actions = {
   register ({ commit }, user) {
     // create user account
     firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-      .then(() => {
+      .then((response) => {
+        user.uid = response.user.uid
         axios.post('http://localhost:8081/api/register', user)
           .then(() => {
             commit('SNACKBAR', {
               snackbar: true,
-              text: 'Registeration Successfull',
+              text: 'Registeration Successful',
               color: 'success'
             })
             Router.push({
@@ -91,7 +92,7 @@ const actions = {
             commit('SNACKBAR', {
               snackbar: true,
               text: 'We could not save your details due to' + error.message,
-              color: 'danger'
+              color: 'error'
             })
           })
       })
@@ -99,7 +100,32 @@ const actions = {
         commit('SNACKBAR', {
           snackbar: true,
           text: `Error Code ${error.code} caused by ${error.message}`,
-          color: 'danger'
+          color: 'error'
+        })
+      })
+  },
+
+  login ({ commit }, user) {
+    firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+      .then((response) => {
+        commit(AUTHENTICATED)
+        commit(FETCH_USER, user)
+        // save access token to localstorage
+        localStorage.setItem('access_token', response.user.ra)
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: 'Welcome!',
+          color: 'success'
+        })
+        Router.push({
+          name: 'BooksList'
+        })
+      })
+      .catch(function () {
+        commit('SNACKBAR', {
+          snackbar: true,
+          text: 'email or password incorrect!',
+          color: 'error'
         })
       })
   },
