@@ -76,8 +76,9 @@ export default {
         justify-content: center;
         height: 80vh;
         align-items: center;
-        background-image: url('../assets/background.png');
-        background-position: center;
+        /* background-image: url('../assets/background.png'); */
+        /* background-repeat: repeat; */
+        /* background-position: left; */
     }
     .login__form{
         width: 400px;

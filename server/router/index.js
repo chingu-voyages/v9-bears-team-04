@@ -104,7 +104,7 @@ router.post('/api/user-book-rel', (req, res) => {
 })
 
 // Allow you to receive book list for the user and request you to send userID
-router.get('/api/book-list', (req, res) => {
+router.post('/api/book-list', (req, res) => {
   var answerBooks = {}
   const requestedUserID = req.body.userID
   db.ref('tables').once('value').then(function (snapshot) {
