@@ -6,10 +6,7 @@
           <v-treeview :items="books"></v-treeview>
         </v-flex>
         <v-flex xs8>
-          <div>{{books}}</div>
-          <Book/>
-          <Book/>
-          <Book/>
+            <Book v-for="item in books" v-bind:key="item.title" :book=item />
           <v-fab-transition>
             <v-tooltip top>
               <template v-slot:activator="{ on }">
@@ -46,19 +43,16 @@ export default {
   data: () => ({
     books: []
   }),
-  created: function () {
-    this.fetchBooksForCurrentUser()
-  },
-  mounted: function () {
-    this.getAllBooksForCurrentUser()
+  created: async function () {
+    await this.fetchBooksForCurrentUser()
+    await this.getAllBooksForCurrentUser()
   },
   methods: {
     async fetchBooksForCurrentUser () {
-      await this.$store.dispatch('fetchBooks', {'userID': 'UJJRqIwfvwT1JN8TvcAwx7YvofE2'})
+      await this.$store.dispatch('fetchBooks', {'userID': this.$store.getters.authUser.uid})
     },
-    async getAllBooksForCurrentUser () {
-      this.books = await this.$store.getters.getBooks
-      console.log(this.books)
+    getAllBooksForCurrentUser () {
+      this.books = this.$store.getters.getBooks
     }
   }
 }

@@ -6,27 +6,32 @@ const state = {
 }
 
 const getters = {
-  getBooks: state => state.books,
-  getRelations: state => state.relations
+  getBooks (state) {
+    let books = []
+    let bookKeys = Object.keys(state.books)
+    for (var i = 0; i < bookKeys.length; i++) {
+      state.books[bookKeys[i]].id = bookKeys[i]
+      books.push(state.books[bookKeys[i]])
+    }
+    return books
+  },
+  getBook (state) {
+    return keyword => state.books[keyword]
+  }
 }
 
 const mutations = {
   setBooks (state, books) {
     state.books = books
-  },
-  setRelations (state, relations) {
-    // mutate state
-    state.relations = relations
   }
 }
 
 const actions = {
-  fetchBooks (context, payload) {
+  async fetchBooks (context, payload) {
     // TODO Extract all urls to the config file
-    axios.post('http://localhost:8081/api/book-list', payload)
+    await axios.post('http://localhost:8081/api/book-list', payload)
       .then(response => {
-        let books = response.data.books
-        context.commit('setBooks', books)
+        context.commit('setBooks', response.data.books)
       })
       .catch(error => {
         console.log(error)
