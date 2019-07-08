@@ -9,7 +9,7 @@
             </v-flex>
             <v-flex xs8>
                 <span class="d-flex justify-space-between ml-small">
-                    <span class="display-1"><router-link :to="{ name:'BookView', params:{ bookID: 'fda8913qdF'} }">Book Name</router-link></span>
+                    <span class="display-1"><router-link :to="{ name:'BookView', params:{ bookID: book.id} }">{{book.title}}</router-link></span>
                     <span class="rating">
                         <v-rating v-model="rating" background-color="white" dark medium color="red" readonly></v-rating>
                     </span>
@@ -18,7 +18,7 @@
                     <v-chip color="white" text-color="black" class="font-weight-bold">Genre</v-chip>
                     <v-chip color="red" dark small class="black--text text-capitalize font-weight-bold" fab round></v-chip>
                 </p>
-                <p class="subheading white--text font-weight-bold ml-small">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Praesentium, dolor! Quod perferendis deserunt sequi dolorem obcaecati temporibus, et deleniti, animi veniam quo a alias quisquam illum voluptas aperiam. Nam, praesentium?Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, odio officiis nulla, ipsam aliquid tempora illum libero dolore incidunt soluta tenetur. Placeat culpa maxime sed! Error officia facere accusantium aliquid.</p>
+                <p class="subheading white--text font-weight-bold ml-small">{{book.author}} {{book.year}}</p>
             </v-flex>
         </v-layout>
         </v-container>
@@ -27,6 +27,7 @@
 <script>
 export default {
   name: 'Book',
+  props: ['book'],
   data: () => ({
     rating: 3
   })

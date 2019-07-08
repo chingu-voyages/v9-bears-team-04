@@ -3,12 +3,10 @@
     <v-container grid-list-md>
       <v-layout row wrap>
         <v-flex xs4 image text-md-left font-weight-bold>
-          <v-treeview :items="items"></v-treeview>
+          <v-treeview :items="books"></v-treeview>
         </v-flex>
         <v-flex xs8>
-          <Book/>
-          <Book/>
-          <Book/>
+            <Book v-for="item in books" v-bind:key="item.title" :book=item />
           <v-fab-transition>
             <v-tooltip top>
               <template v-slot:activator="{ on }">
@@ -36,33 +34,27 @@
 
 <script>
 import Book from './elements/Book'
+
 export default {
   name: 'BooksList',
   components: {
     Book
   },
   data: () => ({
-    items: [
-      {
-        id: 1,
-        name: 'All Books :',
-        children: [
-          { id: 2, name: 'Unleash the dragon by Norman Powell' },
-          { id: 3, name: 'Code For You by Widderman Lee' },
-          { id: 4, name: 'Счастливые люди Ростова' }
-        ]
-      },
-      {
-        id: 15,
-        name: 'Targets :',
-        children: [
-          { id: 16, name: 'October : pdf' },
-          { id: 17, name: 'November : pdf' },
-          { id: 18, name: 'Tutorial : html' }
-        ]
-      }
-    ]
-  })
+    books: []
+  }),
+  created: async function () {
+    await this.fetchBooksForCurrentUser()
+    await this.getAllBooksForCurrentUser()
+  },
+  methods: {
+    async fetchBooksForCurrentUser () {
+      await this.$store.dispatch('fetchBooks', {'userID': this.$store.getters.authUser.uid})
+    },
+    getAllBooksForCurrentUser () {
+      this.books = this.$store.getters.getBooks
+    }
+  }
 }
 </script>
 

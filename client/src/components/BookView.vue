@@ -9,7 +9,7 @@
                     <div class="content">
                         <div class="d-flex justify-space-between">
                             <h1 class="white--text font-weight-bold">
-                                Book Name
+                              {{book.title}}
                             </h1>
                             <span class="text-md-right">
                                 <v-btn flat icon color="white">
@@ -33,8 +33,8 @@
                             <v-rating v-model="rating" background-color="white" dark large color="red" readonly></v-rating>
                         </div>
                         <div class="grey--text">
-                            <h2 class="white--text font-weight-bold" style="margin-top: 1em">Bookkish</h2>
-                            <p class="subheading white--text font-weight-bold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam excepturi dicta voluptates quaerat maxime optio unde et, pariatur aut quibusdam commodi est quam, libero incidunt dignissimos sed ipsum nostrum molestias.lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis repellat sunt ducimus. Minima fugiat in quo, et explicabo adipisci sint illo laboriosam soluta dolore. Consectetur itaque similique possimus quisquam obcaecati.</p>
+                            <h2 class="white--text font-weight-bold" style="margin-top: 1em">{{book.title}}</h2>
+                            <p class="subheading white--text font-weight-bold">Author: {{book.author}}. Year: {{book.year}}</p>
                         </div>
                         <div class="">
                             <h2 class="red--text font-weight-bold justify-space-between"><v-icon large color="red darken-2">access_time</v-icon><span class="ml-5">Page per day</span><span class="ml-5"><v-btn outline fab small color="red" class="font-weight-bold">5</v-btn></span></h2>
@@ -55,9 +55,15 @@
 <script>
 export default {
   name: 'BookView',
-  data: () => {
-    return {
-      rating: 4
+  data: () => ({
+    book: []
+  }),
+  mounted: async function () {
+    await this.getExactBook()
+  },
+  methods: {
+    getExactBook () {
+      this.book = this.$store.getters.getBook(this.$route.params.bookID)
     }
   }
 }
