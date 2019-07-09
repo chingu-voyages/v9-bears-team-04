@@ -9,8 +9,8 @@
         <v-toolbar-items class="hidden-sm-and-down">
             <v-btn flat round :class="(this.$route.name === 'BooksList' || this.$route.name === 'BookView')?'active':''"><router-link
             :to="{ name: 'BooksList', params: {} }">My Book list </router-link></v-btn>
-            <v-btn flat round :class="(this.$route.name === 'Targets')?'active':''">Targets</v-btn>
-            <v-btn flat round :class="(this.$route.name === 'About')?'active':''">About</v-btn>
+<!--            <v-btn flat round :class="(this.$route.name === 'Targets')?'active':''">Targets</v-btn>-->
+<!--            <v-btn flat round :class="(this.$route.name === 'About')?'active':''">About</v-btn>-->
             <v-btn v-if="!isAuthenticated" flat round :class="(this.$route.name === 'Login')?'active':''"><router-link
             :to="{ name: 'Login', params: {} }">Login</router-link></v-btn>
             <v-menu offset-y v-else>

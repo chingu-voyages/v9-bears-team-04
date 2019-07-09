@@ -11,38 +11,20 @@
                             <h1 class="white--text font-weight-bold">
                               {{book.title}}
                             </h1>
-                            <span class="text-md-right">
-                                <v-btn flat icon color="white">
-                                    <v-icon large>notifications</v-icon>
-                                </v-btn>
-                                <v-btn flat icon color="white">
-                                    <v-icon large>fa fa-share</v-icon>
-                                </v-btn>
-                                <v-btn flat icon color="white">
-                                    <v-icon large>more_horiz</v-icon>
-                                </v-btn>
-                            </span>
                         </div>
                         <div>
                             <v-chip color="white" text-color="black" class="font-weight-bold">Genre</v-chip>
-                            <v-btn flat icon color="red">
-                                <v-icon>favorite</v-icon>
-                            </v-btn>
-                        </div>
-                        <div>
-                            <v-rating v-model="rating" background-color="white" dark large color="red" readonly></v-rating>
                         </div>
                         <div class="grey--text">
-                            <h2 class="white--text font-weight-bold" style="margin-top: 1em">{{book.title}}</h2>
+                            <h2 class="white--text font-weight-bold" style="margin-top: 1em">Status</h2>
                             <p class="subheading white--text font-weight-bold">Author: {{book.author}}. Year: {{book.year}}</p>
                         </div>
                         <div class="">
-                            <h2 class="red--text font-weight-bold justify-space-between"><v-icon large color="red darken-2">access_time</v-icon><span class="ml-5">Page per day</span><span class="ml-5"><v-btn outline fab small color="red" class="font-weight-bold">5</v-btn></span></h2>
+                            <h2 class="red--text font-weight-bold justify-space-between"><v-icon large color="red darken-2">access_time</v-icon><span class="ml-5">Pages per day</span><span class="ml-5"><v-btn outline fab small color="red" class="font-weight-bold">5</v-btn></span></h2>
                         </div>
                          <div class="d-flex mt-1">
                             <h2 class="white--text font-weight-bold justify-space-between">
-                                <v-icon large color="white">list</v-icon>
-                                <span class="ml-5">Before</span>
+                                <span class="ml-1">Will have finished before:</span>
                                 <span class="ml-5">27/06/2019</span>
                             </h2>
                         </div>

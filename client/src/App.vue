@@ -3,7 +3,6 @@
     <v-app>
       <Navbar/>
       <router-view/>
-      <Footer />
       <v-snackbar
       v-model="snackbar"
       :timeout="timeout"

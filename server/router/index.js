@@ -54,7 +54,8 @@ router.post('/api/books', (req, res) => {
   db.ref('tables').child('books/').push({
     title: book.title,
     author: book.author,
-    year: book.year
+    year: book.year,
+    genre: book.genre
   })
   return res.status(200).send({
     success: true,
@@ -66,13 +67,15 @@ router.post('/api/books', (req, res) => {
 router.patch('/api/books', (req, res) => {
   var requestedBookID = req.body.bookID
 
-  db.ref('tables/books/' + requestedBookID).update({ 'title': req.body.title,
-    'author': req.body.author,
-    'year': req.body.year
+  db.ref('tables/books/' + requestedBookID).update({
+    title: req.body.title,
+    author: req.body.author,
+    year: req.body.year,
+    genre: req.body.genre
   })
   return res.status(200).send({
     success: true,
-    message: 'Book has been updated'
+    message: 'Book has been updated!'
   })
 })
 
@@ -90,12 +93,14 @@ router.delete('/api/books', (req, res) => {
 // Allow you to add a relation between the book and the user and request userID, bookID and status
 router.post('/api/user-book-rel', (req, res) => {
   const rel = req.body
-  console.log(rel)
 
   db.ref('tables').child('relations/').push({
     userID: rel.userID,
     bookID: rel.bookID,
-    status: rel.status
+    status: rel.status,
+    comment: rel.comment,
+    pagesPerDay: rel.pagesPerDay,
+    finishDate: rel.finishDate
   })
   return res.status(200).send({
     success: true,
