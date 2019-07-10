@@ -21,6 +21,7 @@
 <script>
 import Navbar from './components/elements/Navbar'
 import Footer from './components/elements/Footer'
+import { mapGetters } from 'vuex'
 export default {
   name: 'App',
   components: {
@@ -29,14 +30,14 @@ export default {
   },
   data () {
     return {
-      y: 'top',
+      y: 'right',
       x: null,
       mode: '',
-      timeout: 6000,
-      snackbar: this.$store.getters.snackbar,
-      snackbarText: this.$store.getters.snackbarText,
-      snackbarColor: this.$store.getters.snackbarColor
+      timeout: 6000
     }
+  },
+  computed: {
+    ...mapGetters(['snackbar','snackbarText','snackbarColor'])
   }
 }
 </script>
