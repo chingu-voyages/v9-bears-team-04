@@ -37,7 +37,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['snackbar','snackbarText','snackbarColor'])
+    ...mapGetters(['snackbar', 'snackbarText', 'snackbarColor'])
   }
 }
 </script>
