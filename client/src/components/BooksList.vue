@@ -22,6 +22,9 @@
                 >
                   <v-icon>add</v-icon>
                 </v-btn>
+                <v-flex xs12>
+                  <div v-if="books.length === 0"><h1>There is no books in your Book Store yet! Add them!</h1></div>
+                </v-flex>
               </template>
               <span>Add New Book to your List</span>
             </v-tooltip>
