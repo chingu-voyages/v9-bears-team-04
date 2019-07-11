@@ -29,13 +29,15 @@ export default {
   },
   data () {
     return {
-      y: 'top',
+      y: 'right',
       x: null,
       mode: '',
       timeout: 6000
     }
   },
-  computed: mapGetters(['snackbar', 'snackbarText', 'snackbarColor'])
+  computed: {
+    ...mapGetters(['snackbar', 'snackbarText', 'snackbarColor'])
+  }
 }
 </script>
 
