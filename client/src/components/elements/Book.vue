@@ -12,7 +12,7 @@
                     <span class="display-1"><router-link :to="{ name:'BookView', params:{ bookID: book.id} }">{{book.title}}</router-link></span>
                 </span>
                 <p class="ml-small">
-                    <v-chip color="white" text-color="black" class="font-weight-bold">Genre</v-chip>
+                    <v-chip color="white" text-color="black" class="font-weight-bold">{{ book.genre }}</v-chip>
                 </p>
                 <p class="subheading white--text font-weight-bold ml-small">{{book.author}} {{book.year}}</p>
             </v-flex>
