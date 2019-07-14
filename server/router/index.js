@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const firebase = require('firebase-admin')
 const serviceAccount = require('../book-store-7dc95-firebase-adminsdk-modx9-89845da127')
+// const uuid = require('uuid')
 
 firebase.initializeApp({
   credential: firebase.credential.cert(serviceAccount),
@@ -50,16 +51,22 @@ router.post('/api/register', (req, res) => {
 router.post('/api/books', (req, res) => {
   // book
   const book = req.body
-
-  db.ref('tables').child('books/').push({
+  let data = {
     title: book.title,
     author: book.author,
     year: book.year,
     genre: book.genre
-  })
+  }
+
+  let bookID = db.ref('tables').child('books/').push(data).key
+  data.bookID = bookID
+  data.pagesPerDay = book.pages_per_day
+  data.finishDate = book.date
+  data.comment = book.comment
   return res.status(200).send({
     success: true,
-    message: 'Book saved!'
+    message: 'Book saved!',
+    data
   })
 })
 
