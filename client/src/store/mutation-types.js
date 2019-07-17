@@ -1,0 +1,8 @@
+export const AUTHENTICATED = 'AUTHENTICATED'
+export const FETCH_USER = 'FETCH_USER'
+export const FETCH_TOKEN = 'FETCH_TOKEN'
+export const LOGOUT = 'LOGOUT'
+export const SNACKBAR = 'SNACKBAR'
+export const REGISTER = 'REGISTER'
+export const ADD_BOOK = 'ADD_BOOK'
+export const ADD_RELATION = 'ADD_RELATION'
