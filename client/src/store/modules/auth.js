@@ -19,7 +19,8 @@ const getters = {
   isAuthenticated: state => state.isAuthenticated,
   snackbar: state => state.snackbar,
   snackbarText: state => state.snackbarText,
-  snackbarColor: state => state.snackbarColor
+  snackbarColor: state => state.snackbarColor,
+  token: state => state.token
 }
 
 const actions = {
@@ -54,8 +55,8 @@ const actions = {
       // commit state change
       commit(AUTHENTICATED)
       commit(FETCH_USER, user)
-      // save access token to localstorage
-      localStorage.setItem('access_token', user.ra)
+      // save access token to localstorage which is the userID
+      localStorage.setItem('access_token', user.uid)
       commit('SNACKBAR', {
         snackbar: true,
         text: 'Welcome',
