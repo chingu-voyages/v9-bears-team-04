@@ -6,7 +6,7 @@
           <v-treeview :items="books"></v-treeview>
         </v-flex>
         <v-flex xs8>
-          <Book v-for="item in books" v-bind:key="item.title" :book=item />          
+          <Book v-for="item in books" v-bind:key="item.title" :book=item />
           <v-dialog v-model="dialog" persistent max-width="500">
             <template v-slot:activator="{ on }">
               <v-btn color="red"
@@ -31,7 +31,7 @@
                       style="left: 325px;"
                     >
                       <v-icon>add</v-icon>
-                    </v-btn>                
+                    </v-btn>
                   </template>
                   <span>Add New Book to your List</span>
                 </v-tooltip>
@@ -162,13 +162,13 @@ export default {
   data: () => ({
     books: [],
     dialog: false,
-    menu1:  false,
-    title:'',
-    genre:'',
-    author:'',
-    year:'',
-    pages_per_day:'',
-    comment:'',
+    menu1: false,
+    title: '',
+    genre: '',
+    author: '',
+    year: '',
+    pages_per_day: '',
+    comment: '',
     isLoading: false,
     date: new Date().toISOString().substr(0, 10)
   }),
@@ -196,7 +196,7 @@ export default {
         date: this.date,
         year: this.year
       }
-      await this.$store.dispatch('addBook',payload)
+      await this.$store.dispatch('addBook', payload)
       this.loading = false
       this.dialog = false
       this.title = ''
@@ -205,7 +205,7 @@ export default {
       this.comment = ''
       this.year = ''
       this.pages_per_day = ''
-    },
+    }
   }
 }
 </script>

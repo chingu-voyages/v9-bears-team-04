@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node_modules/.bin/nodemon ./server/server.js",
     "test": "echo \"Error: no test specified yet\" && exit 1",
-    "lint": "./node_modules/.bin/eslint ./server/server.js"
+    "lint": "./node_modules/.bin/eslint ./server/server.js",
+    "build": "node ./client/build/build.js"
   },
   "keywords": [],
   "author": "",

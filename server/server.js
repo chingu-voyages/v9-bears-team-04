@@ -4,10 +4,13 @@ const cors = require('cors')
 const morgan = require('morgan')
 const router = require('./router')
 const app = express()
+var path = require('path')
+var serveStatic = require('serve-static')
 
 app.use(morgan('combined'))
 app.use(bodyParser.json())
 app.use(cors())
 app.use(router)
+app.use(serveStatic(path.join(__dirname, 'client/dist')))
 
 app.listen(process.env.PORT || 8081)
